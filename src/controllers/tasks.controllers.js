@@ -1,17 +1,56 @@
+import { Model } from 'sequelize';
 import Task from '../models/tasks.models.js';
+import User from '../models/users.models.js'; //se importa el modelo User
 
-
-//mostrar todas las tareas
+//mostrar todas las tareas con su usuario
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.findAll();
-    return res.status(200).json(tasks);
+    const tasks = await Task.findAll({
+      include: {
+        model: User,
+        attributes: ['title', 'description', 'isComplete', 'id'] // seleccionamos los atributos que queremos mostrar de las tareas 
+      }
+    });
+    res.json(users);
   } catch (error) {
-    return res.status(500).json({ message: "Error al obtener las tareas" });
+    return res.status(500).json({ message: "Error al obtener los usuarios" });
   }
-}
+};
 
-//añadir una nueva tarea
+export const createUser = async (req, res) => {
+  try {
+    const { title, description, TaskId } = req.body;
+
+    if (!TaskId) {
+      return res.status(400).json({ message: "La tarea debe estar vinculada a un usuario" });
+    }
+     const task = await Task.create({ title, description, userId });
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "error al crear las tareas"});
+  }
+};
+
+//crear una tarea con un usuario
+export const createTaskWithUser = async (req, res) => {
+  try {
+    const { title, description, isComplete, userId } = req.body;
+    if (!userId) {
+      return res.status(400).json({ message: "la tarea debe tener un usuario vinculado"});
+    }
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    const task = await Task.create({ title, description, isComplete, userId });
+    res.status(201).json(task);
+  } catch (error) { 
+    res.status(500).json({ message: "Error al crear la tarea" });
+  }
+};
+
+//añadir una nueva tarea 
 export const createTask = async (req, res) => {
   const { title, description, isComplete } = req.body;
   try {

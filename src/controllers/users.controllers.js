@@ -1,4 +1,21 @@
 import User from '../models/users.models.js';
+import Task from '../models/tasks.models.js';
+
+//mostrar todas las tareas con su usuario
+export const getUsers = async (req, res) => {
+  try {
+    const users = await Task.findAll({
+      include: {
+        model: Task,
+        attributes: ['id', 'name', 'email'] // seleccionamos los atributos que queremos mostrar del usuario
+      }
+    });
+    res.json(tasks);
+  } catch (error) {
+    return res.status(500).json({ message: "Error al obtener las tareas" });
+  }
+};
+
 
 //obtener todos los usuarios
 export const getAllUsers = async (req, res) => {
