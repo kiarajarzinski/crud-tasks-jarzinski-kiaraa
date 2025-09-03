@@ -14,7 +14,12 @@ import sequelize from '../config/database.js';
     isComplete: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    }
+    },
+    //definimos la clave foranea userId
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+    },
 
 });
 
