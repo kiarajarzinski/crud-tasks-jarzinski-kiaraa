@@ -3,11 +3,11 @@ import sequelize from "../config/database.js";
 
 const Profile = sequelize.define('Profile', {
   bio: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(100),
     allowNull: true,
   },
   avatar: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(100),
     allowNull: true
   }
 });

@@ -1,5 +1,4 @@
-import Task from '../models/tasks.models.js';
-import User from '../models/users.models.js';
+import { Task, User } from '../models/index.js';
 
 // Mostrar todas las tareas con el usuario que las creó
 export const getTasks = async (req, res) => {

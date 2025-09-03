@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import taskRoutes from "./src/routes/tasks.routes.js"
 import userRoutes from "./src/routes/users.routes.js";
 import sequelize from "./src/config/database.js";
+import profileRoutes from "./src/routes/profiles.routes.js";
+import projectRoutes from "./src/routes/projects.routes.js";
+import "./src/models/index.js";
 
 dotenv.config();
 
@@ -11,6 +14,8 @@ app.use(express.json());
 
 app.use("/api/tasks", taskRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/profiles", profileRoutes);
+app.use("/api/projects", projectRoutes);
 
 const PORT = process.env.PORT || 3000;
 

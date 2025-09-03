@@ -8,7 +8,7 @@ const Project = sequelize.define('Project', {
     unique: true,
   },
   description: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(100),
     allowNull: true,
   }
 });

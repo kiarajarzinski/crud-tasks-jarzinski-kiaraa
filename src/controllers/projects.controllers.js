@@ -1,6 +1,6 @@
-import Project from '../models/project.models.js';
-import User from '../models/users.models.js';
+import { Project, User } from '../models/index.js';
 
+//crear proyecto vinculado a usuarios
 export const createProject = async (req, res) => {
   const { name, description, userIds } = req.body;
   try {
@@ -15,6 +15,7 @@ export const createProject = async (req, res) => {
   }
 };
 
+//obtener todos los proyectos con datos de usuario
 export const getProjects = async (req, res) => {
   try {
     const projects = await Project.findAll({ include: { model: User, attributes: ['id', 'name', 'email'] } });
