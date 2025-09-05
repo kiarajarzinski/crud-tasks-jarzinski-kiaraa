@@ -16,24 +16,21 @@ export const getUserByPkValidations = [
 ];
 
 //crear el usuario
-export const createUserValidation =  [
+export const createUserValidation = [
   body("name")
-  .notEmpty().withMessage("El nombre es obligatorio")
-  .isString().withMessage("El nombre debe ser texto"),
+    .notEmpty().withMessage("El nombre es obligatorio")
+    .isString().withMessage("El nombre debe ser texto"),
   body("email")
-  .notEmpty().withMessage("El email es obligatorio")
+    .notEmpty().withMessage("El email es obligatorio")
     .isEmail().withMessage("Email invalido")
     .custom(async (email) => {
-      //verifica si el email ya existe en la base de datos
-      const user = await UserModel.findOne({ where: { email: value } });
-      if (user){
-         throw new Error("El email ya está en uso");
-      }
+      const user = await UserModel.findOne({ where: { email } });
+      if (user) throw new Error("El email ya está en uso");
       return true;
     }),
   body("password")
-  .notEmpty().withMessage("La contraseña es obligatoria")
-  .isLength({ min: 8 }).withMessage("La contraseña debe tener al menos 8 caracteres"),
+    .notEmpty().withMessage("La contraseña es obligatoria")
+    .isLength({ min: 8 }).withMessage("La contraseña debe tener al menos 8 caracteres"),
 ];
 
 //actualizar usuario
