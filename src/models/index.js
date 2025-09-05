@@ -6,7 +6,9 @@ import Project from './projects.models.js';
 
 //relaciones entre los modelos
 User.hasMany(Task, { 
-    foreignKey: 'userId'});
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
+});
     Task.belongsTo(User, {
         foreignKey: 'userId',
     });
@@ -15,6 +17,7 @@ User.hasMany(Task, {
         foreignKey: 'userId',});
         Profile.belongsTo(User,{
             foreignKey: 'userId',
+            onDelete: 'CASCADE'
         })
 
         //relacion entre User y Project

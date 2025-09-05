@@ -10,6 +10,10 @@ const Project = sequelize.define('Project', {
   description: {
     type: DataTypes.STRING(100),
     allowNull: true,
+  },
+  isDeleted: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   }
 });
 
