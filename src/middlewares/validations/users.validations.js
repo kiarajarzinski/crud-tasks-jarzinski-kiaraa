@@ -1,6 +1,6 @@
 import {body, param} from "express-validator";
 
-import UserModel from "./../../models/users.models.js";
+import UserModel from "../../models/users.models.js";
 
 //obtener usuario por id
 export const getUserByPkValidations = [
@@ -19,10 +19,10 @@ export const getUserByPkValidations = [
 export const createUserValidation =  [
   body("name")
   .notEmpty().withMessage("El nombre es obligatorio")
-  .isString().withMessage("El nombre debe ser una cadena de texto"),
+  .isString().withMessage("El nombre debe ser texto"),
   body("email")
   .notEmpty().withMessage("El email es obligatorio")
-    .isEmail().withMessage("Email inválido")
+    .isEmail().withMessage("Email invalido")
     .custom(async (email) => {
       //verifica si el email ya existe en la base de datos
       const user = await UserModel.findOne({ where: { email: value } });
