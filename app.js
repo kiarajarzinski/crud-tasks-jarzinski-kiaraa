@@ -19,7 +19,7 @@ app.use("/api/projects", projectRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-sequelize.sync().then(() => {
+sequelize.sync({force:true}).then(() => {
     console.log("Base de datos conectada correctamente");
     app.listen(PORT, () => {
         console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`);
